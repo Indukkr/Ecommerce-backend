@@ -1,23 +1,23 @@
 server:
-  port: 8761
+  port: ${SERVER_PORT:8761}
 
 spring:
   application:
-    name: Eureka-Server
+    name: ${SPRING_APPLICATION_NAME:Eureka-Server}
 
 
 eureka:
   client:
-    register-with-eureka: false
-    fetch-registry: false
+    register-with-eureka: ${EUREKA_REGISTER_WITH_EUREKA:false}
+    fetch-registry: ${EUREKA_FETCH_REGISTRY:false}
 
   server:
-    enable-self-preservation: true
+    enable-self-preservation: ${EUREKA_SELF_PRESERVATION:true}
 
 logging:
   level:
-    com.netflix.eureka: INFO
-    com.netflix.discovery: INFO
+    com.netflix.eureka: ${EUREKA_LOG_LEVEL:INFO}
+    com.netflix.discovery: ${DISCOVERY_LOG_LEVEL:INFO}
 
 management:
   endpoints:
