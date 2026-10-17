@@ -1,0 +1,6 @@
+.env
+.git
+.mvn/
+.idea/
+.vscode/
+*.iml
