@@ -6,6 +6,7 @@ import com.ecommerce.service.CategoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'SELLER')")
     @PostMapping
     public CategoryResponse createCategory(
             @Valid @RequestBody CategoryRequest request) {
@@ -27,6 +29,7 @@ public class CategoryController {
         return categoryService.createCategory(request);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'SELLER')")
     @PutMapping("/{categoryId}")
     public CategoryResponse updateCategory(
             @PathVariable Long categoryId,
@@ -43,6 +46,7 @@ public class CategoryController {
         );
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{categoryId}")
     public void deleteCategory(
             @PathVariable Long categoryId) {

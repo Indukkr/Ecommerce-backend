@@ -6,6 +6,7 @@ import com.ecommerce.service.ReviewService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class ReviewController {
 
     private final ReviewService reviewService;
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'CUSTOMER')")
     @PostMapping("/products/{productId}")
     public ReviewResponse addReview(
             @PathVariable Long productId,
@@ -34,6 +36,7 @@ public class ReviewController {
         );
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'CUSTOMER')")
     @PutMapping("/{reviewId}")
     public ReviewResponse updateReview(
             @PathVariable Long reviewId,
@@ -50,6 +53,7 @@ public class ReviewController {
         );
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'CUSTOMER')")
     @DeleteMapping("/{reviewId}")
     public void deleteReview(
             @PathVariable Long reviewId) {

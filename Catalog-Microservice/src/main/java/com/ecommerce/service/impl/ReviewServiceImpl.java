@@ -2,7 +2,6 @@ package com.ecommerce.service.impl;
 
 import com.ecommerce.dto.request.ReviewRequest;
 import com.ecommerce.dto.response.ReviewResponse;
-import com.ecommerce.service.factory.ReviewFactory;
 import com.ecommerce.mapper.ReviewMapper;
 import com.ecommerce.model.Product;
 import com.ecommerce.model.Review;
@@ -10,6 +9,7 @@ import com.ecommerce.repository.ProductRepository;
 import com.ecommerce.repository.ReviewRepository;
 import com.ecommerce.security.UserContext;
 import com.ecommerce.service.ReviewService;
+import com.ecommerce.service.factory.ReviewFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

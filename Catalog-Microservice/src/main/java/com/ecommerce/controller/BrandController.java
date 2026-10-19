@@ -6,6 +6,7 @@ import com.ecommerce.service.BrandService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class BrandController {
 
     private final BrandService brandService;
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'SELLER')")
     @PostMapping
     public BrandResponse createBrand(
             @Valid @RequestBody BrandRequest request) {
@@ -27,6 +29,7 @@ public class BrandController {
         return brandService.createBrand(request);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'SELLER')")
     @PutMapping("/{brandId}")
     public BrandResponse updateBrand(
             @PathVariable Long brandId,
@@ -38,6 +41,7 @@ public class BrandController {
         );
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{brandId}")
     public void deleteBrand(
             @PathVariable Long brandId) {

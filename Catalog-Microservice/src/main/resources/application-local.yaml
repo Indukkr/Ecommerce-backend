@@ -24,3 +24,6 @@ eureka:
 
   instance:
     prefer-ip-address: true
+
+jwt:
+  secret: ThisIsMySecurityJwtSecretKeyWhichIsResponsibleToMakeSignatureForToken

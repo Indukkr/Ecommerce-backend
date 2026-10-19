@@ -10,6 +10,7 @@ import com.ecommerce.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,6 +21,7 @@ public class ProductController {
 
     private final ProductService productService;
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'SELLER')")
     @PostMapping
     public ProductResponse createProduct(
             @Valid @RequestBody ProductRequest request
@@ -28,6 +30,7 @@ public class ProductController {
         return productService.createProduct(request);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'SELLER')")
     @PutMapping("/{productId}")
     public ProductResponse updateProduct(
             @PathVariable Long productId,
@@ -37,6 +40,7 @@ public class ProductController {
         return productService.updateProduct(productId, request);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{productId}")
     public void deleteProduct(@PathVariable Long productId) {
         log.info("Delete Product Api is called!!");
@@ -107,6 +111,7 @@ public class ProductController {
         );
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'SELLER')")
     @PostMapping("/{productId}/images")
     public ProductImageResponse uploadProductImage(
             @PathVariable Long productId,
@@ -123,6 +128,7 @@ public class ProductController {
         );
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'SELLER')")
     @DeleteMapping("/images/{imageId}")
     public void deleteProductImage(
             @PathVariable Long imageId) {
